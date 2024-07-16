@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ super() }} - категории
+{% endblock %}
+
+{% block content %}
+    {% for category in category_list %}
+    <a href="{{ url_for(category.func_name) }}" class="category">
+        <div class="category_content">
+            <img src="{{ url_for('static',filename='img/') }}{{ category.img }}" alt="" class="category_img">
+            <h3 class="category_name">{{ category.name }}</h3>
+        </div>
+    </a>
+    {% endfor %}
+{% endblock %}

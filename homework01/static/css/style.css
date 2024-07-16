@@ -1,3 +1,8 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
 .container {
     background: #f0f0f0
 }
@@ -14,7 +19,7 @@
     display: inline-block;
 }
 
-.navlink:hover {
+.nav-link:hover {
     background-color: #731386;
 }
 
@@ -24,10 +29,12 @@
 
 .footer {
     background-color: #1c1a1d;
+    padding: 40px 60px;
 }
 
 .contacts {
-    color: #8d8d8d
+    color: #a5a5a5;
+    margin-bottom: 10px;
 }
 
 .contact {
