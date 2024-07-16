@@ -1,0 +1,35 @@
+.container {
+    background: #f0f0f0
+}
+
+.menu {
+    background-color: #8d18a5;
+}
+
+.nav-link {
+    color: lavender;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.navlink:hover {
+    background-color: #731386;
+}
+
+.nav-link:active {
+    background-color: #590f68;
+}
+
+.footer {
+    background-color: #1c1a1d;
+}
+
+.contacts {
+    color: #8d8d8d
+}
+
+.contact {
+    color: #413d42;
+}
