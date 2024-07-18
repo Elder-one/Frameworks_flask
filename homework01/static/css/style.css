@@ -4,11 +4,13 @@
 }
 
 .container {
-    background: #f0f0f0
+    background: #cfcfcf;
+    min-height: 100vh;
 }
 
 .menu {
     background-color: #8d18a5;
+    text-align: left;
 }
 
 .nav-link {
@@ -27,9 +29,15 @@
     background-color: #590f68;
 }
 
+.category_block {
+    text-align: center;
+}
+
 .footer {
+    text-align: left;
     background-color: #1c1a1d;
     padding: 40px 60px;
+    margin-top: 100px;
 }
 
 .contacts {
@@ -39,4 +47,122 @@
 
 .contact {
     color: #413d42;
+}
+
+.category_img {
+    width: 300px;
+    height: 300px;
+}
+
+.category_content {
+    width: 330px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: center;
+}
+
+.category {
+    text-decoration: none;
+    background-color: #e7e7e7;
+    display: inline-block;
+    margin: 25px;
+}
+
+.category:hover {
+    background-color: #d4d4d4;
+}
+
+.category_name {
+    color: lavender;
+    padding: 14px 40px;
+    text-align: center;
+    background-color: #64361b;
+    display: inline-block;
+}
+
+.main_container {
+    text-align: center;
+}
+
+.main_block {
+    padding: 15px;
+    margin-top: 60px;
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: center;
+    width: 750px;
+    height: 520px;
+    background-color: #f1f1f1;
+    display: inline-block;
+}
+
+.main_img {
+    width: 400px;
+    height: 500px;
+}
+
+.welcome {
+    text-align: left;
+    color: #590f68;
+    display: inline-block;
+    vertical-align: middle;
+    width: 300px;
+    height: 500px;
+}
+
+.no_items_block {
+    padding: 15px;
+    margin-top: 60px;
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: center;
+    width: 750px;
+    background-color: #f1f1f1;
+    display: inline-block;
+}
+
+.no_items {
+    color: #590f68;
+    display: inline-block;
+    padding-top: 250px;
+    padding-bottom: 250px;
+}
+
+.item_block {
+    padding-top: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 40px;
+    margin-top: 80px;
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: center;
+    background-color: #f1f1f1;
+    display: inline-block;
+}
+
+.item_block_name {
+    text-align: left;
+    color: #590f68;
+}
+
+.item_block_img {
+    width: 150px;
+    height: 150px;
+}
+
+.item_desc {
+    margin-left: 10px;
+    text-align: left;
+    width: 300px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.item_name {
+    width: 300px;
+    color: #590f68;
+    text-align: left;
+    display: inline-block;
 }

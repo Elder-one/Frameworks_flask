@@ -1,0 +1,11 @@
+{% extends 'base.html' %} {% block title %} {{ super() }} - главная {% endblock %} {% block content %}
+<div class="main_container">
+    <div class="main_block">
+        <h1 class="welcome">
+            Добро пожаловать на сайт нашего магазина
+        </h1>
+        <img src="{{ url_for('static', filename='img/main_IMG.jpg') }}" alt="" class="main_img">
+    </div>
+</div>
+
+{% endblock %}

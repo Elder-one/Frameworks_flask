@@ -1,0 +1,18 @@
+{% extends 'base.html' %} {% block title %} {{ super() }} - {{ cat_name }} {% endblock %} {% block content %}
+<div class="category_block">
+    {% if items %} {% for item in items %}
+    <a href="{{ url_for('item_page', page_name=item.page_name) }}" class="category">
+        <div class="category_content">
+            <img src="{{ url_for('static',filename='img/') }}{{ item.img }}" alt="" class="category_img">
+            <h2 class="item_name">{{ item.name }}</h2>
+        </div>
+    </a>
+    {% endfor %} {% else %}
+    <div class="main_block">
+        <h1 class="no_items">
+            В данной категории пока нет товаров
+        </h1>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
