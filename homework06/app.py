@@ -1,25 +1,46 @@
 import sqlite3
-from typing import List
 from fastapi import FastAPI
-from homework06.db_models import database, users, products, orders
-from homework06.db_models import UserIn, UserUpd, User
-from homework06.db_models import ProductIn, ProductUpd, Product
-from homework06.db_models import OrderIn, OrderUpd, Order
+from db_models import database, users, products, orders
+from db_models import UserIn, UserUpd, User
+from db_models import ProductIn, ProductUpd, Product
+from db_models import OrderIn, OrderUpd, Order
 from datetime import datetime
 
 app = FastAPI()
 
+tables = {
+        "users": users,
+        "products": products,
+        "orders": orders
+    }
 
-@app.get("/users/", response_model=List[User])
-async def get_all_users():
-    query = users.select()
+
+@app.get("/{table}/{item_id}/")
+async def get_id_request(table: str, item_id: int):
+    table_ = tables.get(table)
+    if table_ is None:
+        return {"message": f"Table {table} not found"}
+    query = table_.select().where(table_.c.id == item_id)
+    return await database.fetch_one(query)
+
+
+@app.get("/{table}/")
+async def get_all_request(table: str):
+    table_ = tables.get(table)
+    if table_ is None:
+        return {"message": f"Table {table} not found"}
+    query = table_.select()
     return await database.fetch_all(query)
 
 
-@app.get("/users/{user_id}", response_model=User)
-async def get_user(user_id: int):
-    query = users.select().where(users.c.id == user_id)
-    return await database.fetch_one(query)
+@app.delete("/{table}/{item_id}")
+async def delete_item(table: str, item_id: int):
+    table_ = tables.get(table)
+    if table_ is None:
+        return {"message": f"Table {table} not found"}
+    query = table_.delete().where(table_.c.id == item_id)
+    await database.execute(query)
+    return {"message": f"{table}[id={item_id}] has been deleted"}
 
 
 @app.post("/users/")
@@ -40,26 +61,7 @@ async def update_user(user_id: int, upd_user: UserUpd):
              where(users.c.id == user_id).
              values(**upd_user))
     await database.execute(query)
-    return await get_user(user_id)
-
-
-@app.delete("/users/{user_id}")
-async def delete_user(user_id: int):
-    query = users.delete().where(users.c.id == user_id)
-    await database.execute(query)
-    return {"message": f"User[id={user_id}] has been deleted"}
-
-
-@app.get("/products/", response_model=List[Product])
-async def get_all_products():
-    query = products.select()
-    return await database.fetch_all(query)
-
-
-@app.get("/products/{product_id}", response_model=Product)
-async def get_product(user_id: int):
-    query = products.select().where(users.c.id == user_id)
-    return await database.fetch_one(query)
+    return await get_id_request("users", user_id)
 
 
 @app.post("/products/", response_model=Product)
@@ -77,27 +79,7 @@ async def update_product(product_id: int, upd_product: ProductUpd):
              where(products.c.id == product_id).
              values(**upd_product))
     await database.execute(query)
-    return await get_product(product_id)
-
-
-@app.delete("/products/{product_id}")
-async def delete_product(product_id: int):
-    query = (products.delete().
-             where(products.c.id == product_id))
-    await database.execute(query)
-    return {"message": f"Product[id={product_id}] has been deleted"}
-
-
-@app.get("/orders/", response_model=List[Order])
-async def get_all_orders():
-    query = orders.select()
-    return await database.fetch_all(query)
-
-
-@app.get("/orders/{order_id}", response_model=Order)
-async def get_order(order_id: int):
-    query = orders.select().where(orders.c.id == order_id)
-    return await database.fetch_one(query)
+    return await get_id_request("products", product_id)
 
 
 @app.post("/orders/", response_model=Order)
@@ -106,7 +88,7 @@ async def create_order(new_order: OrderIn):
                                    status="accepted",
                                    **new_order.dict())
     last_id = await database.execute(query)
-    return await get_order(last_id)
+    return await get_id_request("orders", last_id)
 
 
 @app.put("/orders/{order_id}", response_model=Order)
@@ -117,12 +99,4 @@ async def update_order(order_id: int, upd_order: OrderUpd):
              where(orders.c.id == order_id).
              values(**upd_order))
     await database.execute(query)
-    return await get_order(order_id)
-
-
-@app.delete("/orders/{order_id}")
-async def delete_order(order_id: int):
-    query = (orders.delete().
-             where(orders.c.id == order_id))
-    await database.execute(query)
-    return {"message": f"Order[id={order_id}] has been deleted"}
+    return await get_id_request("orders", order_id)
